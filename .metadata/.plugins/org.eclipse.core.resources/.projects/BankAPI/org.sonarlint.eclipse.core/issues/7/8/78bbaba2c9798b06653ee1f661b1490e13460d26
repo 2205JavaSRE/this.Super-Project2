@@ -1,0 +1,19 @@
+
+‰
+java:S1192"NDefine a constant instead of duplicating this literal "to_account_id" 6 times.(­³åÌûÿÿÿÿ8šõÌÙ•0HõRCRITICALZ
+CODE_SMELL
+
+java:S1192v"KDefine a constant instead of duplicating this literal "yyyy-MM-dd" 3 times.(–âŞå8·ú†Ù•0HÎRCRITICALZ
+CODE_SMELL
+‚
+java:S1192 "GDefine a constant instead of duplicating this literal "status" 6 times.(“ÛŒóÿÿÿÿÿ8šõÌÙ•0HıRCRITICALZ
+CODE_SMELL
+…
+java:S1192"ODefine a constant instead of duplicating this literal "transaction_id" 7 times.(ÜìÕÛ8ÆßÂÙ•0HßRCRITICALZ
+CODE_SMELL
+†
+java:S1192"PDefine a constant instead of duplicating this literal "from_account_id" 6 times.(ïí·Ç8šõÌÙ•0HùRCRITICALZ
+CODE_SMELL
+‚
+java:S1192"GDefine a constant instead of duplicating this literal "amount" 6 times.(—Ùõ™şÿÿÿÿ8šõÌÙ•0HñRCRITICALZ
+CODE_SMELL

@@ -1,0 +1,52 @@
+package com.revature.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.revature.models.Customer;
+import com.revature.util.ConnectionFactory;
+
+public class CustomerDaoImpl implements CustomerDao {
+
+	@Override
+	public Customer selectCustomerByID(int id) {
+		String sql = "SELECT * FROM \"BankAPI\".\"customer\" WHERE user_id=?";
+		Connection connection = ConnectionFactory.getConnection();
+		Customer selectedCustomer = null;
+		try (PreparedStatement ps = connection.prepareStatement(sql)){
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				selectedCustomer = new Customer(rs.getInt("customer_id"),
+						rs.getString("first_name"),
+						rs.getString("last_name"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return selectedCustomer;
+	}
+
+	@Override
+	public List<Customer> selectAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insertCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean updateCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

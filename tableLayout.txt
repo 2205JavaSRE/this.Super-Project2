@@ -1,0 +1,27 @@
+account table
+account_id
+primary_customer_id
+secondary_customer_id
+balance
+type
+status
+label
+
+customer table
+customer_id
+first_name
+last_name
+
+transaction table
+transaction_id
+from_account_id
+to_account_id
+date
+amount
+status
+
+user_id
+customer_id
+username
+password
+is_manager

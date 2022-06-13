@@ -1,0 +1,33 @@
+package com.revature.dao;
+
+import java.util.List;
+
+import com.revature.models.Customer;
+
+public class CustomerDaoImpl implements CustomerDao {
+
+	@Override
+	public Customer selectCustomerByID(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Customer> selectAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insertCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean updateCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.revature.services;
+import com.revature.models.User;
+
+public class UserService {
+	
+	public boolean login(String username, String password) {
+		return false;
+	}
+	
+	public User getUserByUsername(String username) {
+		return null;
+	}
+}
