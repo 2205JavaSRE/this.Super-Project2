@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User selectUserByID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".\"user\" WHERE user_id=?";
+		String sql = "SELECT * FROM \"bankAPI\".\"user\" WHERE user_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		User selectedUser = null;
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User selectUserByUsername(String username) {
-		String sql = "SELECT * FROM \"BankAPI\".\"user\" WHERE username=?";
+		String sql = "SELECT * FROM \"bankAPI\".\"user\" WHERE username=?";
 		Connection connection = ConnectionFactory.getConnection();
 		User selectedUser = null;
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> selectAllUsers() {
-		String sql = "SELECT * FROM \"BankAPI\".\"user\" ORDER BY user_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".\"user\" ORDER BY user_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<User> selectedUsers = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insertUser(User u) {
-		String sql = "INSERT INTO \"BankAPI\".\"user\" (user_id, customer_id, username, password, is_manager) VALUES (DEFAULT, ?, ?, ?, ?) RETURNING user_id";
+		String sql = "INSERT INTO \"bankAPI\".\"user\" (user_id, customer_id, username, password, is_manager) VALUES (DEFAULT, ?, ?, ?, ?) RETURNING user_id";
 		Connection connection = ConnectionFactory.getConnection();
 		int userID = -1;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -104,7 +104,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean updateUser(User u) {
-		String sql = "UPDATE \"BankAPI\".\"user\" (customer_id, username, password, is_manager) = (?, ?, ?, ?) WHERE user_id=?";
+		String sql = "UPDATE \"bankAPI\".\"user\" (customer_id, username, password, is_manager) = (?, ?, ?, ?) WHERE user_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		boolean executed = false;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
