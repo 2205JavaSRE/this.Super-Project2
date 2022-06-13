@@ -1,9 +1,0 @@
-
-c
-java:S1602#",Remove useless curly braces around statement(¶„èèýÿÿÿÿ8¬Ñ¥Í•0HuRMINORZ
-CODE_SMELL
-^
-java:S1602.",Remove useless curly braces around statement(•”Œ½8¬Ñ¥Í•0HvRMINORZ
-CODE_SMELL
-|
-java:S2095"JUse try-with-resources or close this "JvmGcMetrics" in a "finally" clause.(…±Îáøÿÿÿÿ8­¶ÒÌ•0HfRBLOCKERZBUG

@@ -1,14 +1,0 @@
-
-†
-java:S3008	"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Цј­Ѓюяяяя8КоСР•0HВRMINORZ
-CODE_SMELL
-†
-java:S3008
-"SRename this field "USERNAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Т«“К8КоСР•0HГRMINORZ
-CODE_SMELL
-‹
-java:S3008"SRename this field "PASSWORD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰“ѓгщяяяя8КоСР•0HДRMINORZ
-CODE_SMELL
-m
-java:S1118":Add a private constructor to hide the implicit public one.(јЪЉЃ8КоСР•0HЕRMAJORZ
-CODE_SMELL

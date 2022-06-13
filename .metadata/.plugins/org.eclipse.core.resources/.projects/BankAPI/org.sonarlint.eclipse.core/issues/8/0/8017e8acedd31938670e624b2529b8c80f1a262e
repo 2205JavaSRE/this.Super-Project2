@@ -1,19 +1,0 @@
-
-Š
-java:S1192"TDefine a constant instead of duplicating this literal "primary_customer_id" 5 times.(ÅŞç8Úà´Ú•0HøRCRITICALZ
-CODE_SMELL
-†
-java:S1192"KDefine a constant instead of duplicating this literal "account_id" 6 times.(Š¥÷üÿÿÿÿ8Úà´Ú•0HîRCRITICALZ
-CODE_SMELL
-ƒ
-java:S1192"HDefine a constant instead of duplicating this literal "balance" 5 times.(ŞŒ‹şÿÿÿÿ8Úà´Ú•0HóRCRITICALZ
-CODE_SMELL
-|
-java:S1192"FDefine a constant instead of duplicating this literal "label" 5 times.(ÍÌÙÓ8Úà´Ú•0HıRCRITICALZ
-CODE_SMELL
-|
-java:S1192"GDefine a constant instead of duplicating this literal "status" 5 times.(Ú¨Á{8Úà´Ú•0H‚RCRITICALZ
-CODE_SMELL
-‘
-java:S1192"VDefine a constant instead of duplicating this literal "secondary_customer_id" 5 times.(ÆØæøÿÿÿÿ8Úà´Ú•0H‡RCRITICALZ
-CODE_SMELL
