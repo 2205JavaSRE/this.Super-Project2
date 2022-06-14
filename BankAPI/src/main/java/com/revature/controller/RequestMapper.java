@@ -19,6 +19,7 @@ import io.micrometer.prometheus.PrometheusMeterRegistry;
 public class RequestMapper {
 	
 	private UserController userController = new UserController();
+	private TransactionController transactionController = new TransactionController();
 
 
 	public void configureRoutes(Javalin app, PrometheusMeterRegistry registry) {
@@ -68,6 +69,21 @@ public class RequestMapper {
 			activeUsers.decrementAndGet();
 			ctx.result("You are logged out");
 			ctx.status(201);
+		});
+		
+		
+		// User story 12
+		app.get("/transactions", ctx -> {
+			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)
+					&& ctx.cookieStore("manager") != null 
+					&& ctx.cookieStore("manager").equals(true)) {
+				transactionController.getAllTransactions(ctx);
+				ctx.status(201);
+			}
+			else {
+				ctx.result("those credentials are invalid");
+				ctx.status(401);
+			}
 		});
 		
 	

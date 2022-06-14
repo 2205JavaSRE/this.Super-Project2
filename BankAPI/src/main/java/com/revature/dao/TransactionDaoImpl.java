@@ -16,7 +16,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public Transaction selectTransactionByID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".transaction WHERE transaction_id=?";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE transaction_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		Transaction selectedTransaction = null;
 
@@ -39,7 +39,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectAllTransactions() {
-		String sql = "SELECT * FROM \"BankAPI\".transaction ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectAllTransactionsFromAccountID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".transaction WHERE from_account=? ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE from_account=? ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -86,7 +86,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectAllTransactionsToAccountID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".transaction WHERE to_account=? ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE to_account=? ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -110,7 +110,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectTransactionsByDate(String date) {
-		String sql = "SELECT * FROM \"BankAPI\".transaction WHERE date=? ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE date=? ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -134,7 +134,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectTransactionsByDate(String dateRangeBegin, String dateRangeEnd) {
-		String sql = "SELECT * FROM \"BankAPI\".transaction WHERE date>=? AND date<=? ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE date>=? AND date<=? ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -160,7 +160,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public int insertTransaction(Transaction t) {
-		String sql = "INSERT INTO \"BankAPI\".transaction (transaction_id, from_account_id, to_account_id, date, amount, status) VALUES (DEFAULT, ?, ?, ?, ?, ?) RETURNING transaction_id";
+		String sql = "INSERT INTO \"bankAPI\".transaction (transaction_id, from_account_id, to_account_id, date, amount, status) VALUES (DEFAULT, ?, ?, ?, ?, ?) RETURNING transaction_id";
 		Connection connection = ConnectionFactory.getConnection();
 		int transactionID = -1;
 		Date now = new Date(System.currentTimeMillis());
@@ -182,7 +182,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public boolean updateTransaction(Transaction t) {
-		String sql = "UPDATE \"BankAPI\".transaction (from_account_id, to_account_id, date, amount, status) = (?, ?, ?, ?, ?) WHERE transaction_id=?";
+		String sql = "UPDATE \"bankAPI\".transaction (from_account_id, to_account_id, date, amount, status) = (?, ?, ?, ?, ?) WHERE transaction_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		boolean executed = false;
 		Date now = new Date(System.currentTimeMillis());
