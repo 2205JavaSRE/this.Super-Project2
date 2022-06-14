@@ -20,7 +20,7 @@ public class RequestMapper {
 	
 	private UserController userController = new UserController();
 	private TransactionController transactionController = new TransactionController();
-
+	private BankAppControl bController = new BankAppControl();
 
 	public void configureRoutes(Javalin app, PrometheusMeterRegistry registry) {
 		new ClassLoaderMetrics().bindTo(registry);
@@ -71,7 +71,7 @@ public class RequestMapper {
 			ctx.status(201);
 		});
 		
-		
+		/*
 		// User story 12
 		app.get("/transactions", ctx -> {
 			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)
@@ -84,6 +84,12 @@ public class RequestMapper {
 				ctx.result("those credentials are invalid");
 				ctx.status(401);
 			}
+		});*/
+		
+		app.post("/register", ctx ->{
+			
+			bController.registerBankAccount(ctx);
+			
 		});
 		
 	

@@ -13,7 +13,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Customer selectCustomerByID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".\"customer\" WHERE customer_id=?";
+		String sql = "SELECT * FROM \"bankAPI\".\"customer\" WHERE customer_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		Customer selectedCustomer = null;
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -33,7 +33,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public List<Customer> selectAllCustomers() {
-		String sql = "SELECT * FROM \"BankAPI\".\"customer\" ORDER BY customer_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".\"customer\" ORDER BY customer_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Customer> selectedCustomers = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -52,7 +52,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	
 	@Override
 	public int insertCustomer(Customer c) {
-		String sql = "INSERT INTO \"BankAPI\".\"customer\" (customer_id, first_name, last_name) VALUES (DEFAULT, ?, ?) RETURNING customer_id";
+		String sql = "INSERT INTO \"bankAPI\".\"customer\" (customer_id, first_name, last_name) VALUES (DEFAULT, ?, ?) RETURNING customer_id";
 		Connection connection = ConnectionFactory.getConnection();
 		int customerID = -1;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -71,7 +71,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public boolean updateCustomer(Customer c) {
-		String sql = "UPDATE \"BankAPI\".\"customer\" (first_name, last_name) = (?, ?) WHERE customer_id=?";
+		String sql = "UPDATE \"bankAPI\".\"customer\" (first_name, last_name) = (?, ?) WHERE customer_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		boolean executed = false;
         try (PreparedStatement ps = connection.prepareStatement(sql)){

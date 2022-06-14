@@ -13,7 +13,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public Account selectAccountByID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".\"account\" WHERE account_id=?";
+		String sql = "SELECT * FROM \"bankAPI\".\"account\" WHERE account_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		Account selectedAccount = null;
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -37,7 +37,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<Account> selectAllAccounts() {
-		String sql = "SELECT * FROM \"BankAPI\".\"account\" ORDER BY account_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".\"account\" ORDER BY account_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Account> selectedAccounts = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -60,7 +60,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<Account> selectAllAccountsByCustomerID(int id) {
-		String sql = "SELECT * FROM \"BankAPI\".\"account\" WHERE primary_customer_id=? OR secondary_customer_id=? ORDER BY account_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".\"account\" WHERE primary_customer_id=? OR secondary_customer_id=? ORDER BY account_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Account> selectedAccounts = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -85,7 +85,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<Account> selectAllAccountsByType(String type) {
-		String sql = "SELECT * FROM \"BankAPI\".\"account\" WHERE type=? ORDER BY account_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".\"account\" WHERE type=? ORDER BY account_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Account> selectedAccounts = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -109,7 +109,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public List<Account> selectAllAccountsByStatus(String status) {
-		String sql = "SELECT * FROM \"BankAPI\".\"account\" WHERE status=? ORDER BY account_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".\"account\" WHERE status=? ORDER BY account_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Account> selectedAccounts = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -133,9 +133,9 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public int insertAccount(Account a) {
-		String sql = "INSERT INTO \"BankAPI\".transaction (account_id, primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?) RETURNING account_id";
+		String sql = "INSERT INTO \"bankAPI\".\"account\"  (primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (?, ?, ?, ?, ?, ?) RETURNING account_id";
 		Connection connection = ConnectionFactory.getConnection();
-		int accountID = -1;
+		int accountID = -1; 
         try (PreparedStatement ps = connection.prepareStatement(sql)){
 			
         	ps.setInt(1, a.getPrimaryCustomerID());
@@ -155,7 +155,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public boolean updateAccount(Account a) {
-		String sql = "UPDATE \"BankAPI\".transaction (primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (?, ?, ?, ?, ?, ?) WHERE account_id=?";
+		String sql = "UPDATE \"bankAPI\".transaction (primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (?, ?, ?, ?, ?, ?) WHERE account_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		boolean executed = false;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
