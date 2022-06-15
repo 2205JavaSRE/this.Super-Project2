@@ -1,6 +1,6 @@
 services:
   app:
-    image: 'bank-api'
+    image: 'lherrera0/bank-api:latest'
     container_name: bank-api
     ports:
       - 7500:7500
