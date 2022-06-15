@@ -97,6 +97,10 @@ public class RequestMapper {
 			bController.jointAccount(ctx);
 		});
 		
+		app.post("/secondaccount", ctx ->{
+			
+			bController.secondaryAccount(ctx);
+		});
 		
 	
 	}

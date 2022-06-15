@@ -176,7 +176,6 @@ public class AccountDaoImpl implements AccountDao {
 	public void jointAccount(int primary, int secondary) {
 		String sql = "update \"bankAPI\".account set secondary_customer_id = ? where primary_customer_id = ?;";
 		Connection connection = ConnectionFactory.getConnection();
-		boolean executed = false;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
 			
         	ps.setInt(1, secondary);
@@ -189,8 +188,40 @@ public class AccountDaoImpl implements AccountDao {
 		
 	}
 	
+	public int secondaryAccount(Account a) {
+		String sql = "INSERT INTO \"bankAPI\".\"account\"  (primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (?, ?, ?, ?, ?, ?) RETURNING account_id";
+		Connection connection = ConnectionFactory.getConnection();
+		int accountID = -1; 
+        try (PreparedStatement ps = connection.prepareStatement(sql)){
+			
+        	ps.setInt(1, a.getPrimaryCustomerID());
+			ps.setInt(2, a.getSecondaryCustomerID());
+			ps.setDouble(3, a.getBalance());
+			ps.setString(4, a.getType());
+			ps.setString(5, a.getStatus());
+			ps.setString(6, a.getLabel());
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			accountID = rs.getInt("account_id");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return accountID;
+	}
 	
-	
-	
-
+	public String accountCheck(int cusId) {
+		String sql = "SELECT status FROM \"bankAPI\".account WHERE primary_customer_id =? ;";
+		Connection connection = ConnectionFactory.getConnection();
+		String status = "p";
+        try (PreparedStatement ps = connection.prepareStatement(sql)){
+			
+        	ps.setInt(1, cusId);
+        	ResultSet rs = ps.executeQuery();
+			rs.next();
+			status = rs.getString("status");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}		
+		return status; 
+	}
 }

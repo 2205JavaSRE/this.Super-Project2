@@ -20,5 +20,9 @@ public interface AccountDao {
 	public boolean updateAccount(Account a);
 	
 	public void jointAccount(int primary, int secondary);
+	
+	public int secondaryAccount(Account a);
+	
+	public String accountCheck(int cusId); 
 
 }

@@ -36,5 +36,20 @@ public class BankAppControl {
 		ctx.result("Account Number " + intPrimary + " is joint with " + intsecondary +" number account ");
 	}
 	
+	public void secondaryAccount(Context ctx) {
+		String cusId = ctx.formParam("cusId");
+		String type = ctx.formParam("Account Type");
+		String label = ctx.formParam("Label");
+		
+		int intcusId = Integer.parseInt(cusId);
+		String bankStatus = bService.accountCheck(intcusId);
+		if(!bankStatus.equals("p")) {
+			bService.secondaryBankAccount(intcusId, type, type, label);
+			ctx.result("Second account created successfully");
+			
+		}else {
+			ctx.result("Your account does not approved yet");
+		}
+	}
 
 }

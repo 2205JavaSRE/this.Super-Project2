@@ -40,10 +40,24 @@ public class BankService {
 		aDao.jointAccount(primary, secondary);
 		
 	}
+	public String accountCheck(int cusId) {
+		String statuss = aDao.accountCheck(cusId);
+		return statuss;
+		
+		
+	}
+	
+	
+	public  void secondaryBankAccount(int cusId, String type, String status, String label ){
+			status = "p";
+			Account newAccount = new Account(-1, cusId, cusId, 0, type, status, label);
+			
+			int accountId  = aDao.secondaryAccount(newAccount);
+			
+		}		
+		
+	}
 	
 	
 	
-	
-	
-	
-}
+
