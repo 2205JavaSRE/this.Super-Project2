@@ -155,7 +155,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public boolean updateAccount(Account a) {
-		String sql = "UPDATE \"bankAPI\".transaction (primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (?, ?, ?, ?, ?, ?) WHERE account_id=?";
+		String sql = "UPDATE \"bankAPI\".\"account\" (primary_customer_id, secondary_customer_id, balance, type, status, label) VALUES (?, ?, ?, ?, ?, ?) WHERE account_id=?";
 		Connection connection = ConnectionFactory.getConnection();
 		boolean executed = false;
         try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -173,5 +173,24 @@ public class AccountDaoImpl implements AccountDao {
 		}
 		return executed;
 	}
+	public void jointAccount(int primary, int secondary) {
+		String sql = "update \"bankAPI\".account set secondary_customer_id = ? where primary_customer_id = ?;";
+		Connection connection = ConnectionFactory.getConnection();
+		boolean executed = false;
+        try (PreparedStatement ps = connection.prepareStatement(sql)){
+			
+        	ps.setInt(1, secondary);
+			ps.setInt(2, primary);
+			ps.execute();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
 
 }

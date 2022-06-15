@@ -16,7 +16,7 @@ public class BankService {
 	
 	private static AccountDao aDao = new AccountDaoImpl();
 	private static CustomerDao cDao = new CustomerDaoImpl();
-	//private static TransactionDao tDao = new TransactionDaoImpl();
+	private static TransactionDao tDao = new TransactionDaoImpl();
 	private static UserDao	uDao = new UserDaoImpl();
 	
 
@@ -34,10 +34,14 @@ public class BankService {
 		
 		int accountId  = aDao.insertAccount(newAccount);
 		
-		
-		
+	}
+	
+	public void jointAccount(int primary, int secondary) {
+		aDao.jointAccount(primary, secondary);
 		
 	}
+	
+	
 	
 	
 	

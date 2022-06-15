@@ -25,5 +25,16 @@ public class BankAppControl {
 		
 		
 	}
+	
+	public void jointAccount(Context ctx) {
+		String primary = ctx.formParam("primary");
+		String secondary = ctx.formParam("secondary"); 
+		int intPrimary = Integer.parseInt(primary);
+		int intsecondary = Integer.parseInt(secondary);
+		bService.jointAccount(intPrimary, intsecondary);
+		ctx.status(HttpCode.CREATED);
+		ctx.result("Account Number " + intPrimary + " is joint with " + intsecondary +" number account ");
+	}
+	
 
 }

@@ -71,7 +71,7 @@ public class RequestMapper {
 			ctx.status(201);
 		});
 		
-		/*
+		
 		// User story 12
 		app.get("/transactions", ctx -> {
 			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)
@@ -84,13 +84,19 @@ public class RequestMapper {
 				ctx.result("those credentials are invalid");
 				ctx.status(401);
 			}
-		});*/
+		});
 		
 		app.post("/register", ctx ->{
 			
 			bController.registerBankAccount(ctx);
 			
 		});
+		
+		app.post("/joint", ctx ->{
+			
+			bController.jointAccount(ctx);
+		});
+		
 		
 	
 	}

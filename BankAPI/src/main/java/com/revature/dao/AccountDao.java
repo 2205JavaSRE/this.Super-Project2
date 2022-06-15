@@ -18,5 +18,7 @@ public interface AccountDao {
 	public int insertAccount(Account a);
 	
 	public boolean updateAccount(Account a);
+	
+	public void jointAccount(int primary, int secondary);
 
 }
