@@ -19,6 +19,6 @@ public interface TransactionDao {
 	
 	public int insertTransaction(Transaction t);
 	
-	public boolean updateTransaction(Transaction t);
+	public int updateTransaction(Transaction t);
 
 }

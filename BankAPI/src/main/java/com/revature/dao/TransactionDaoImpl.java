@@ -21,7 +21,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		Transaction selectedTransaction = null;
 
 		try(PreparedStatement ps = connection.prepareStatement(sql)){
-
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				selectedTransaction = new Transaction(rs.getInt("transaction_id"),
@@ -62,7 +62,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectAllTransactionsFromAccountID(int id) {
-		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE from_account=? ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE from_account_id=? ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -86,7 +86,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public List<Transaction> selectAllTransactionsToAccountID(int id) {
-		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE to_account=? ORDER BY transaction_id ASC";
+		String sql = "SELECT * FROM \"bankAPI\".transaction WHERE to_account_id=? ORDER BY transaction_id ASC";
 		Connection connection = ConnectionFactory.getConnection();
 		List<Transaction> selectedTransactions = new ArrayList<>();
 
@@ -181,10 +181,12 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 
 	@Override
-	public boolean updateTransaction(Transaction t) {
-		String sql = "UPDATE \"bankAPI\".transaction (from_account_id, to_account_id, date, amount, status) = (?, ?, ?, ?, ?) WHERE transaction_id=?";
+	public int updateTransaction(Transaction t) {
+		String sql = "UPDATE \"bankAPI\".transaction "
+				+ " SET from_account_id = ?, to_account_id = ?, date = ?, amount = ?, status = ? "
+				+ " WHERE transaction_id = ?";
 		Connection connection = ConnectionFactory.getConnection();
-		boolean executed = false;
+		int rowsUpdated = -1;
 		Date now = new Date(System.currentTimeMillis());
         try (PreparedStatement ps = connection.prepareStatement(sql)){
 			
@@ -194,11 +196,11 @@ public class TransactionDaoImpl implements TransactionDao {
 			ps.setDouble(4, t.getAmount());
 			ps.setString(5, t.getStatus());
         	ps.setInt(6, t.getTransactionID());
-			executed = ps.execute();
+        	rowsUpdated = ps.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return executed;
+		return rowsUpdated;
 	}
 
 }

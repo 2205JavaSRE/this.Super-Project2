@@ -37,7 +37,13 @@ public class TransactionService {
 		return tDao.insertTransaction(t) > 0;
 	}
 	
-	public boolean updateTransaction(Transaction t) {
+	/**
+	 * 
+	 * 
+	 * @param t
+	 * @return the number of rows updated.
+	 */
+	public int updateTransaction(Transaction t) {
 		return tDao.updateTransaction(t);
 	}
 
