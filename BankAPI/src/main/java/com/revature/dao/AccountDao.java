@@ -28,5 +28,7 @@ public interface AccountDao {
 	public String accountCheck(int cusId); 
 	
 	public boolean withdrawById(int id, double amount) throws SQLException;
+	
+	public void depositById(int id, double amount);
 
 }

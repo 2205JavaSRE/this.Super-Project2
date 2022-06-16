@@ -258,12 +258,29 @@ public class AccountDaoImpl implements AccountDao {
 			return statuss ;
 
 	}
+	public void depositById(int id, double amount){
+		String update = "UPDATE \"bankAPI\".account SET balance = (balance + ?) WHERE account_id =? ;";
+		String insert = "INSERT INTO \"bankAPI\".\"transaction\" (from_account_id, to_account_id, \"date\",amount) VALUES ( ?, ?, now(),(+?));";
+		Connection connection = ConnectionFactory.getConnection();
+			try {
+	        	PreparedStatement ps2 = connection.prepareStatement(update);
+	        	PreparedStatement ps3 = connection.prepareStatement(insert);
+	        	//update account
+	        	ps2.setDouble(1, amount);
+	        	ps2.setInt(2, id);
+	        	ps2.execute();
+	        	//insert transaction
+	        	ps3.setInt(1, id);
+	        	ps3.setInt(2, id);
+	        	ps3.setDouble(3, amount);
+	        	ps3.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+
 }

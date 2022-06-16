@@ -72,6 +72,10 @@ public class BankService {
 		return statuss;
 		
 	}
+	public void depositById(int id, double amount) {
+		
+		aDao.depositById(id, amount);
+	}
 	
 		
 	}

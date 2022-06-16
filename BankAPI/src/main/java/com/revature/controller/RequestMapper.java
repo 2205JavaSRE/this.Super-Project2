@@ -113,6 +113,12 @@ public class RequestMapper {
 			
 		});
 		
+		app.post("/deposit", ctx ->{
+			
+			bController.depositById(ctx);
+			
+		});
+		
 	
 	}
 }

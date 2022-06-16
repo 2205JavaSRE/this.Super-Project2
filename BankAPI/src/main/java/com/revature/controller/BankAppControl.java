@@ -74,5 +74,15 @@ public class BankAppControl {
 			ctx.result("wrong input");
 		}
 	}
+	public void depositById(Context ctx){
+		String accId = ctx.formParam("account id");
+		String amount = ctx.formParam("Amount");
+		int intaccId = Integer.parseInt(accId);
+		double doubleAmount = Double.valueOf(amount);
+		bService.depositById(intaccId, doubleAmount);
+		ctx.result("The amount : " + doubleAmount + " is deposited.");
+		
+	}
+	
 
 }
