@@ -36,6 +36,15 @@ public class UserController {
 		return userService.login(username, password);
 	}
 
+	/**
+	 * Returns the User associated with "username" stored in the cookie.
+	 * 
+	 * This does not validate the password, 
+	 * so there is NO security against fake cookies in this function.
+	 * 
+	 * @param ctx
+	 * @return
+	 */
 	public User getUser(Context ctx) {
 		String username = ctx.cookieStore("username");
 		if(username == null) {

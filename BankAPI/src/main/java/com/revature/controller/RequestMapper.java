@@ -19,6 +19,7 @@ import io.micrometer.prometheus.PrometheusMeterRegistry;
 public class RequestMapper {
 	
 	private UserController userController = new UserController();
+	private CustomerController customerController = new CustomerController();
 	private TransactionController transactionController = new TransactionController();
 	private BankAppControl bController = new BankAppControl();
 	private AccountController accountController = new AccountController();
@@ -73,8 +74,14 @@ public class RequestMapper {
 			ctx.status(201);
 		});
 		
-		//TODO: User story 9: As an employee, I can view a customer's bank accounts.
-		app.get("/account/{customer_id}", ctx -> accountController.viewCustomerAccounts(ctx));
+		//User story 9: As an employee, I can view a customer's bank accounts.
+		app.get("/accounts/{customer_id}", ctx -> accountController.viewCustomerAccounts(ctx));
+		
+		//9.2 (extra) as an employee, I can view the list of customers.
+		app.get("/customers", ctx -> customerController.getAllCustomers(ctx));
+		
+		//9.3 (extra) as an employee, I can find a customer by their username.
+		app.get("/customer/{username}", ctx -> customerController.getCustomerByUsername(ctx));
 		
 		//User story 10: As a customer, I can post a money transfer to another account.
 		app.post("/transfers", ctx -> transactionController.newTransaction(ctx));
