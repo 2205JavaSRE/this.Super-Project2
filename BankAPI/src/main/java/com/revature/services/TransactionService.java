@@ -47,4 +47,9 @@ public class TransactionService {
 		return tDao.updateTransaction(t);
 	}
 
+	public boolean validateTransaction(Transaction transaction) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

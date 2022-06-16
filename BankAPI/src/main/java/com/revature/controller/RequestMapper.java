@@ -74,7 +74,10 @@ public class RequestMapper {
 			ctx.status(201);
 		});
 		
-		//TODO: only allow transfers between approved accounts.
+		//TODO: User Story 7: As the system, I reject invalid transactions.
+		// TODO: Reject: A withdrawal that would result in a negative balance.
+		// TODO: Reject: A deposit or withdrawal of negative money.
+		// TODO: only allow transfers between approved accounts.
 		
 		//User story 8: As an employee, I can approve or reject an account registration by a user.
 		//view pending accounts

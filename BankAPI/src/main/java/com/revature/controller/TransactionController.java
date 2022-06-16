@@ -78,8 +78,38 @@ public class TransactionController {
 		
 		Date now = new Date(System.currentTimeMillis());
 		
-		//TODO: make sure that the FROM account is MY account
-		//TODO: make sure the transaction isn't negative!
+		
+		Account fromAccount = accountService.selectAccountByID(fromAccountId);
+		Account toAccount = accountService.selectAccountByID(toAccountId);
+		if(fromAccount == null || toAccount == null) {
+			ctx.result("One or more of the accounts listed in the transaction does not exist.");
+			return;
+		}
+		
+		//make sure that the FROM account is MY account
+		if(fromAccount.getPrimaryCustomerID() != userController.getUser(ctx).getCustomerID()
+			&& fromAccount.getSecondaryCustomerID() != userController.getUser(ctx).getCustomerID()) {
+			ctx.result("You cannot transfer money from an account that you don't own!");
+			return;
+		}
+		//make sure that the FROM account is an approved account
+		if(!fromAccount.getStatus().equals("a")) {
+			ctx.result("You cannot send money from account_id: " 
+					+ fromAccountId + ". It is not an approved account.");
+			return;
+		}
+		
+		//make sure the transaction isn't negative!
+		if(amount < 0) {
+			ctx.result("You cannot send negative money!");
+			return;
+		}
+		
+		
+		
+		// we don't need to check that the TO account is approved, because it's possible that
+		// someone might make a new account and set a starting balance by transferring funds.
+		// hence there could exist a transfer to a non-approved account.
 		
 		// I can't know the transactionId before it exists, hence -1.
 		// "p" is short for "pending"
@@ -141,6 +171,18 @@ public class TransactionController {
 			ctx.result("Could not set status. " + e.getMessage());
 			return;
 		}
+		
+		if(status.equals("a")) {
+			//If we are approving a transaction, make sure that everything is in order.
+			boolean validated = transactionService.validateTransaction(transaction);
+			if(!validated) {
+				ctx.result("This transaction cannot be approved becase it is not valid."
+						+ " check if there is enough money in the from account,"
+						+ " check that both accounts are approved.");
+				return;
+			}
+		}
+		
 		int rowsUpdated = transactionService.updateTransaction(transaction);
 		
 		assert rowsUpdated <= 1;
