@@ -52,8 +52,17 @@ public class Transaction {
 	public String getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(String status) throws IllegalArgumentException{
+		
+		switch(status) {
+		case "a": // Approved
+		case "d": // Denied
+		case "p": // Pending
+			this.status = status;
+			return;
+		default:
+			throw new IllegalArgumentException("Invalid transaction status: " + status);
+		}
 	}
 	@Override
 	public int hashCode() {
