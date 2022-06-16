@@ -32,7 +32,7 @@ public class AccountService {
 		return aDao.insertAccount(a) > 0;
 	}
 	
-	public boolean updateAccount(Account a) {
+	public int updateAccount(Account a) {
 		return aDao.updateAccount(a);
 	}
 

@@ -19,8 +19,6 @@ public interface AccountDao {
 	
 	public int insertAccount(Account a);
 	
-	public boolean updateAccount(Account a);
-	
 	public void jointAccount(int primary, int secondary);
 	
 	public int secondaryAccount(Account a);
@@ -30,5 +28,7 @@ public interface AccountDao {
 	public boolean withdrawById(int id, double amount) throws SQLException;
 	
 	public void depositById(int id, double amount);
+	
+	public int updateAccount(Account a);
 
 }

@@ -74,6 +74,14 @@ public class RequestMapper {
 			ctx.status(201);
 		});
 		
+		//TODO: only allow transfers between approved accounts.
+		
+		//User story 8: As an employee, I can approve or reject an account registration by a user.
+		//view pending accounts
+		app.get("/pendingAccounts", ctx -> accountController.getPendingAccounts(ctx));
+		//accept/reject account.
+		app.patch("/account", ctx -> accountController.acceptOrRejectAccount(ctx));
+		
 		//User story 9: As an employee, I can view a customer's bank accounts.
 		app.get("/accounts/{customer_id}", ctx -> accountController.viewCustomerAccounts(ctx));
 		

@@ -20,7 +20,7 @@ public class Account {
 		this.secondaryCustomerID = secondaryCustomerID;
 		this.balance = balance;
 		this.type = type;
-		this.status = status;
+		setStatus(status);
 		this.label = label;
 	}
 
@@ -68,8 +68,16 @@ public class Account {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(String status) throws IllegalArgumentException {
+		switch(status) {
+		case "a": // Approved
+		case "d": // Denied
+		case "p": // Pending
+			this.status = status;
+			return;
+		default:
+			throw new IllegalArgumentException("Invalid transaction status: " + status);
+		}
 	}
 
 	public String getLabel() {

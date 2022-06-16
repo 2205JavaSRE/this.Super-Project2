@@ -41,6 +41,59 @@ public class AccountController {
 		ctx.json(accounts);
 		return;
 	}
+
+	public void acceptOrRejectAccount(Context ctx) {
+		if(!userController.isValidCredentials(ctx) 
+				|| !userController.getUser(ctx).isManager()) {
+			ctx.result("Please login as an Employee to approve/reject accounts.");
+			return;
+		}
+		
+		int accountId;
+		try {
+			accountId = Integer.parseInt(ctx.formParam("account_id"));
+		} catch (Exception e) {
+			ctx.result("Please input an Integer for account_id in form params.");
+			return;
+		}
+		
+		Account account = accountService.selectAccountByID(accountId);
+		
+		if(account == null) {
+			ctx.result("Could not find account with account id: " + accountId);
+			return;
+		}
+		
+		String status = ctx.formParam("status");
+		try {
+			account.setStatus(status);
+		} catch (Exception e) {
+			ctx.result("Invalid status. " + e.getMessage());
+			return;
+		}
+		
+		int numUpdated = accountService.updateAccount(account);
+		if(numUpdated != 1) {
+			ctx.result("Could not update account.");
+			return;
+		}
+		
+		ctx.result("Account status updated!");
+		return;
+	}
+
+	public void getPendingAccounts(Context ctx) {
+		if(!userController.isValidCredentials(ctx) 
+				|| !userController.getUser(ctx).isManager()) {
+			ctx.result("Please login as an Employee to approve/reject accounts.");
+			return;
+		}
+		
+		List<Account> pendingAccounts = accountService.selectAllAccountsByStatus("p");
+		
+		ctx.json(pendingAccounts);
+		return ;
+	}
 	
 	
 }
