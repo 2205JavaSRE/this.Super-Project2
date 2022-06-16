@@ -1,6 +1,6 @@
 package com.revature.controller;
 
-import java.util.List;
+//import java.util.List;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import io.javalin.http.Context;
@@ -15,6 +15,8 @@ public class UserController {
 			ctx.cookieStore("access", true);
 			ctx.cookieStore("userID", selectedUser.getUserID());
 			ctx.cookieStore("manager", selectedUser.isManager());
+			ctx.cookieStore("username", ctx.formParam("username"));
+			ctx.cookieStore("password", ctx.formParam("password"));
 			ctx.result("You are logged in");
 			ctx.status(201);
 			return true;
@@ -23,6 +25,23 @@ public class UserController {
 			ctx.status(401);
 			return false;
 		}
+	}
+
+	public boolean isValidCredentials(Context ctx) {
+		String username = ctx.cookieStore("username");
+		String password = ctx.cookieStore("password");
+		if(username == null || password == null) {
+			return false;
+		}
+		return userService.login(username, password);
+	}
+
+	public User getUser(Context ctx) {
+		String username = ctx.cookieStore("username");
+		if(username == null) {
+			return null;
+		}
+		return userService.getUserByUsername(username);
 	}
 	
 }
