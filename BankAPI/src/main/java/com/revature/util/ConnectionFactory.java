@@ -10,9 +10,13 @@ public class ConnectionFactory {
 	private static String USERNAME = System.getenv("db_user");
 	private static String PASSWORD = System.getenv("db_password");
 	
-	private static Connection connection;
+	private static Connection connection = null;
 	
 	public static Connection getConnection() {
+		
+		if(connection != null) {
+			return connection; //Make it go faster!
+		}
 		
 		if(URL == null) {
 			throw new Error("db_url (e.g. \"jdbc:postgresql://rds.com/database\" )is not set. please set the environment variable in your run configurations.");
@@ -27,6 +31,7 @@ public class ConnectionFactory {
 		try {
 			System.out.println("Making Connection...");
 			connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			System.out.println("Connection Made!");
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
