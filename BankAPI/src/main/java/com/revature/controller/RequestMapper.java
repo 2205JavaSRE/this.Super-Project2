@@ -21,6 +21,8 @@ public class RequestMapper {
 	private UserController userController = new UserController();
 	private TransactionController transactionController = new TransactionController();
 	private BankAppControl bController = new BankAppControl();
+	private AccountController accountController = new AccountController();
+
 
 	public void configureRoutes(Javalin app, PrometheusMeterRegistry registry) {
 		new ClassLoaderMetrics().bindTo(registry);
@@ -71,8 +73,19 @@ public class RequestMapper {
 			ctx.status(201);
 		});
 		
+		//TODO: User story 9: As an employee, I can view a customer's bank accounts.
+		app.get("/account/{customer_id}", ctx -> accountController.viewCustomerAccounts(ctx));
 		
-		// User story 12
+		//User story 10: As a customer, I can post a money transfer to another account.
+		app.post("/transfers", ctx -> transactionController.newTransaction(ctx));
+		
+		//User story 11: As a customer, I can accept a money transfer from another account.
+		//View money Transfers
+		app.get("/transfers", ctx -> transactionController.viewTransfers(ctx));
+		//Approve/deny money transfers
+		app.patch("/transfers", ctx -> transactionController.approveOrDenyTransfer(ctx));
+		
+		// User story 12: An employee, I can view a log of all transactions.
 		app.get("/transactions", ctx -> {
 			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)
 					&& ctx.cookieStore("manager") != null 

@@ -7,6 +7,11 @@ import io.javalin.http.Context;
 
 public class AccountController {
 	private AccountService accountService = new AccountService();
+
+	public void viewCustomerAccounts(Context ctx) {
+		// TODO Auto-generated method stub
+		return;
+	}
 	
 	
 }
