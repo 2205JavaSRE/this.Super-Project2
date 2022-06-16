@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.revature.dao.AccountDao;
@@ -64,6 +65,14 @@ public class BankService {
 		return accountList;
 		
 	}
+	
+	public boolean withdrawById(int id, double amount) throws SQLException {
+		
+		boolean statuss = aDao.withdrawById(id, amount);
+		return statuss;
+		
+	}
+	
 		
 	}
 	

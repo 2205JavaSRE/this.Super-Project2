@@ -1,6 +1,8 @@
 package com.revature.dao;
 
 import com.revature.models.Account;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public interface AccountDao {
@@ -24,5 +26,7 @@ public interface AccountDao {
 	public int secondaryAccount(Account a);
 	
 	public String accountCheck(int cusId); 
+	
+	public boolean withdrawById(int id, double amount) throws SQLException;
 
 }

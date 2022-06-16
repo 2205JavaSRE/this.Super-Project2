@@ -107,6 +107,12 @@ public class RequestMapper {
 			bController.selectAllAccountById(ctx);
 		});
 		
+		app.post("/withdraw", ctx ->{
+			
+			bController.withdrawById(ctx);
+			
+		});
+		
 	
 	}
 }
