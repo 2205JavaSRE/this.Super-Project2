@@ -102,6 +102,11 @@ public class RequestMapper {
 			bController.secondaryAccount(ctx);
 		});
 		
+		app.get("/accounts/{id}", ctx ->{
+			
+			bController.selectAllAccountById(ctx);
+		});
+		
 	
 	}
 }

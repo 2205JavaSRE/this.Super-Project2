@@ -1,5 +1,8 @@
 package com.revature.controller;
 
+import java.util.List;
+
+import com.revature.models.Account;
 import com.revature.services.BankService;
 
 import io.javalin.http.Context;
@@ -51,5 +54,13 @@ public class BankAppControl {
 			ctx.result("Your account does not approved yet");
 		}
 	}
+	public void selectAllAccountById(Context ctx) {
+		
+		String cusId = ctx.pathParam("id");
+		int intcusId = Integer.parseInt(cusId);
+		List<Account> accountList =bService.selectAccountById(intcusId);
+		ctx.json(accountList);
+	}
+	
 
 }

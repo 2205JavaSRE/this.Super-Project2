@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import com.revature.dao.AccountDao;
 import com.revature.dao.AccountDaoImpl;
 import com.revature.dao.CustomerDao;
@@ -54,7 +56,14 @@ public class BankService {
 			
 			int accountId  = aDao.secondaryAccount(newAccount);
 			
-		}		
+		}
+	public List<Account>  selectAccountById(int cusId) {
+		
+		List<Account> accountList = aDao.selectAllAccountsByCustomerID(cusId);
+		
+		return accountList;
+		
+	}
 		
 	}
 	
