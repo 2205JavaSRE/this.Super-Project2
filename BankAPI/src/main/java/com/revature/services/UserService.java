@@ -11,6 +11,10 @@ public class UserService {
 	
 	//Login
 	public boolean login(String username, String password) {
+		User user = getUserByUsername(username);
+		if(user == null) {
+			return false;
+		}
 		return getUserByUsername(username).getPassword().equals(password);
 	}
 	
