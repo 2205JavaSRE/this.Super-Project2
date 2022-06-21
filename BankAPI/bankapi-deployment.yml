@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: bankapi-deployment 
+  namespace: havgin-space  
+  labels: 
+    app: bankapi
+
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: bankapi 
+  template: 
+    metadata: 
+      labels: 
+        app: bankapi
+    spec: 
+      containers: 
+        - name: bankapi-deployment
+          image: lherrera0/bank-api:latest
+          ports:
+            - containerPort: 7500
+          imagePullPolicy: Always 

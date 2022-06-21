@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: bankapi-micrometer-monitor
+  namespace: havgin-space
+  labels:
+    app: bankapi
+    prometheus: devops
+spec:
+  endpoints:
+  - port: http
+    interval: 15s
+    path: /metrics
+  namespaceSelector:
+    matchNames:
+    - havgin-space
+  selector:
+    matchLabels:
+      app: bankapi
