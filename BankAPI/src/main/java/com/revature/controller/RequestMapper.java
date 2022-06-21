@@ -73,10 +73,6 @@ public class RequestMapper {
 			ctx.result("pushed");
 		});
 		
-		app.get("/push", ctx ->{
-			counter.increment(5);
-			ctx.result("increased");
-		});
 		
 
 		app.post("/login", ctx -> {

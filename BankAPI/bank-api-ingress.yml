@@ -12,7 +12,7 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: "/grafana/?(.*)"
+        path: "/gggrafana/?(.*)"
         backend:
           service:
             name: monitoring-grafana
@@ -26,7 +26,7 @@ spec:
             port: 
               number: 9090
       - pathType: Prefix
-        path: "/alert-manager/?(.*)"
+        path: "/aaalert-manager/?(.*)"
         backend:
           service:
             name: monitoring-kube-prometheus-alertmanager
