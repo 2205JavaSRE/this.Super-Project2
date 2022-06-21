@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Pod
 
 metadata: 
-  name: banpapi-pod
+  name: bankapi-pod
   namespace: havgin-space
   labels: 
     app: bankapi-demo 
