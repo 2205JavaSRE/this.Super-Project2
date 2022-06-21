@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bankapi-havgin-micro
+  namespace: havgin-space
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/user-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+      paths:
+      - patyType: Prefix
+        path: "/bankapimicro/(.*)"
+        backend:
+          service:
+            name: bankapi-service
+            port:
+              number: 7500
