@@ -12,7 +12,7 @@ spec:
   restartPolicy: Never 
   containers: 
     - name: bankapi-demo-pod
-      image: lherrera0/bank-api
+      image: lherrera0/bank-api:latest
       env:
       - name: db_url
         value: "jdbc:postgresql://database-1.c7jfv3zcy9rz.us-west-1.rds.amazonaws.com:5432/postgres"
@@ -21,7 +21,8 @@ spec:
       - name: db_password 
         value: "s3cur3m3"
       imagePullPolicy: Always 
-      resources:  
-        limits: 
-          memory: "128Mi"
-          cpu: "500m"
+      ports: 
+        - containerPort: 7500
+        
+       
+      

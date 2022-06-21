@@ -12,21 +12,21 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: "/bankapigrafana/?(.*)"
+        path: "/grafana/?(.*)"
         backend:
           service:
             name: monitoring-grafana
             port: 
               number: 80
       - pathType: Prefix
-        path: "/bankapiprometheus/?(.*)" # need to change prometheus root url
+        path: "/thisdotsuper/?(.*)" # need to change prometheus root url
         backend:
           service:
             name: monitoring-kube-prometheus-prometheus
             port: 
               number: 9090
       - pathType: Prefix
-        path: "/bankapialert-manager/?(.*)"
+        path: "/alert-manager/?(.*)"
         backend:
           service:
             name: monitoring-kube-prometheus-alertmanager
