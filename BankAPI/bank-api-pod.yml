@@ -4,7 +4,7 @@ kind: Pod
 
 metadata: 
   name: bankapi-pod
-  namespace: havgin-space
+  namespace: this-dot-super-space
   labels: 
     app: bankapi-demo 
 

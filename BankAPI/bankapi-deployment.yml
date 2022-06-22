@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment 
 metadata: 
   name: bankapi-deployment 
-  namespace: havgin-space  
+  namespace: this-dot-super-space 
   labels: 
     app: bankapi
 

@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bankapi-ingress 
-  namespace: havgin-space
+  namespace: this-dot-super-space
   annotations: 
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/user-regex: "true"
@@ -12,7 +12,7 @@ spec:
     - http:
         paths: 
         - pathType: Prefix
-          path: "/yasinmicro/(.*)"
+          path: "/thisdotsuper/(.*)"
           backend: 
             service: 
               name: bankapi-service

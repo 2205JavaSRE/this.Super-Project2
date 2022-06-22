@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: bankapi-micrometer-monitor
-  namespace: havgin-space
+  namespace: this-dot-super-space
   labels:
     app: bankapi
     prometheus: devops
@@ -13,7 +13,7 @@ spec:
     path: /metrics
   namespaceSelector:
     matchNames:
-    - havgin-space
+    - this-dot-super-space
   selector:
     matchLabels:
       app: bankapi
