@@ -12,7 +12,7 @@ spec:
     - http:
         paths: 
         - pathType: Prefix
-          path: "/thisdotsuper/(.*)"
+          path: "/thisteam/(.*)"
           backend: 
             service: 
               name: bankapi-service
