@@ -15,6 +15,8 @@ import io.micrometer.core.instrument.binder.system.DiskSpaceMetrics;
 import io.micrometer.core.instrument.binder.system.ProcessorMetrics;
 import io.micrometer.core.instrument.binder.system.UptimeMetrics;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.Gauge;
 
 public class RequestMapper {
 	
@@ -35,7 +37,15 @@ public class RequestMapper {
 		new DiskSpaceMetrics(new File(System.getProperty("user.dir"))).bindTo(registry);
 		
 		AtomicInteger activeUsers = registry.gauge("numberGauge", new AtomicInteger(0));
-
+		//Counters for request_submit
+		Counter counter = Counter.builder("Path_request_submit").description("track number").tag("purpose", "request_submit").register(registry);
+		//Counters for request for reimbursement
+		Counter counter1 = Counter.builder("Path_request_reimbursement").description("track number").tag("purpose", "reimbursment").register(registry);
+		CollectorRegistry registry2 = new CollectorRegistry();
+		Gauge gauge= Gauge.build().name("Gauge_test").help("size").register(registry2);
+		
+		
+		
 		app.get("/", ctx -> {
 			ctx.html("<h1>Please Login to continue</h1>\n"
 					+ "<form method=\"post\" action=\"/login\">\n"
@@ -47,9 +57,23 @@ public class RequestMapper {
 					+ "</form>");
 		});
 		
+
+		
+		
+		
 		app.get("/metrics", ctx ->{
 			ctx.result(registry.scrape());
 		});
+		app.get("/pull", ctx ->{
+			gauge.dec();
+			ctx.result("pulled");
+		});
+		app.get("/push", ctx ->{
+			gauge.inc();
+			ctx.result("pushed");
+		});
+		
+		
 
 		app.post("/login", ctx -> {
 			if(userController.login(ctx))
@@ -147,6 +171,12 @@ public class RequestMapper {
 		app.post("/deposit", ctx ->{
 			
 			bController.depositById(ctx);
+			
+		});
+		
+		app.get("/version", ctx ->{
+			
+			VersionController.getVersion(ctx);
 			
 		});
 		

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: bankapi-deployment 
+  namespace: this-dot-super-space 
+  labels: 
+    app: bankapi
+
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: bankapi 
+  template: 
+    metadata: 
+      labels: 
+        app: bankapi
+    spec: 
+      containers: 
+        - name: bankapi-deployment
+          image: lherrera0/bank-api:latest
+          env:
+          - name: db_url
+            value: "jdbc:postgresql://database-1.c7jfv3zcy9rz.us-west-1.rds.amazonaws.com:5432/postgres"
+          - name: db_user
+            value: "java_login"
+          - name: db_password 
+            value: "s3cur3m3"
+          ports:
+            - containerPort: 7500
+          imagePullPolicy: Always 

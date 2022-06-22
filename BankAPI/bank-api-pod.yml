@@ -1,0 +1,28 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata: 
+  name: bankapi-pod
+  namespace: this-dot-super-space
+  labels: 
+    app: bankapi-demo 
+
+spec: 
+  restartPolicy: Never 
+  containers: 
+    - name: bankapi-demo-pod
+      image: lherrera0/bank-api:latest
+      env:
+      - name: db_url
+        value: "jdbc:postgresql://database-1.c7jfv3zcy9rz.us-west-1.rds.amazonaws.com:5432/postgres"
+      - name: db_user
+        value: "java_login"
+      - name: db_password 
+        value: "s3cur3m3"
+      imagePullPolicy: Always 
+      ports: 
+        - containerPort: 7500
+        
+       
+      

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankapi-service
+  namespace: this-dot-super-space
+  labels:
+    app: bankapi
+spec:
+  selector:
+    app: bankapi
+  ports:
+    - port: 80
+      targetPort: 7500
+      protocol: TCP
+      name: http
