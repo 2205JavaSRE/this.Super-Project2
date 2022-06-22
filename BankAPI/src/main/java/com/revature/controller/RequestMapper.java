@@ -174,6 +174,12 @@ public class RequestMapper {
 			
 		});
 		
+		app.get("/version", ctx ->{
+			
+			VersionController.getVersion(ctx);
+			
+		});
+		
 	
 	}
 }
