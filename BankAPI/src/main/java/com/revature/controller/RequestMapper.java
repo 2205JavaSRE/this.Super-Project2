@@ -17,7 +17,6 @@ import io.micrometer.core.instrument.binder.system.UptimeMetrics;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Gauge;
-
 public class RequestMapper {
 	
 	private UserController userController = new UserController();
@@ -38,12 +37,14 @@ public class RequestMapper {
 		
 		AtomicInteger activeUsers = registry.gauge("numberGauge", new AtomicInteger(0));
 		//Counters for request_submit
-		Counter counter = Counter.builder("Path_request_submit").description("track number").tag("purpose", "request_submit").register(registry);
+		Counter counter = Counter.builder("total_login").description("track number").tag("purpose", "request_login").register(registry);
 		//Counters for request for reimbursement
-		Counter counter1 = Counter.builder("Path_request_reimbursement").description("track number").tag("purpose", "reimbursment").register(registry);
+		Counter counter1 = Counter.builder("total_login_success").description("track number").tag("purpose", "login_success").register(registry);
+		//Counter counter2 = Counter.builder("total_login_success").description("track number").tag("purpose", "login_success").register(registry);
+		//Counter counter1 = Counter.builder("http_request_total").
 		CollectorRegistry registry2 = new CollectorRegistry();
 		Gauge gauge= Gauge.build().name("Gauge_test").help("size").register(registry2);
-		
+
 		
 		
 		app.get("/", ctx -> {
@@ -64,20 +65,16 @@ public class RequestMapper {
 		app.get("/metrics", ctx ->{
 			ctx.result(registry.scrape());
 		});
-		app.get("/pull", ctx ->{
-			gauge.dec();
-			ctx.result("pulled");
-		});
-		app.get("/push", ctx ->{
-			gauge.inc();
-			ctx.result("pushed");
-		});
+
 		
 		
 
 		app.post("/login", ctx -> {
-			if(userController.login(ctx))
-				activeUsers.incrementAndGet();			
+			counter.increment(1);
+			if(userController.login(ctx)) {
+				activeUsers.incrementAndGet();	
+				counter1.increment(1);
+			}	
 		});
 		
 		app.get("/login", ctx -> {
@@ -142,35 +139,49 @@ public class RequestMapper {
 		});
 		
 		app.post("/register", ctx ->{
-			
 			bController.registerBankAccount(ctx);
 			
 		});
 		
 		app.post("/joint", ctx ->{
 			
-			bController.jointAccount(ctx);
+			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)) {
+				bController.jointAccount(ctx);
+				ctx.status(201);
+			}
+			else {
+				ctx.result("those credentials are invalid");
+				ctx.status(401);
+			}
 		});
 		
 		app.post("/secondaccount", ctx ->{
-			
-			bController.secondaryAccount(ctx);
+			if(userController.login(ctx)) {
+				bController.secondaryAccount(ctx);
+			}
+	
 		});
 		
 		app.get("/accounts/{id}", ctx ->{
+			if(userController.login(ctx)) {
+				bController.selectAllAccountById(ctx);
+			}
 			
-			bController.selectAllAccountById(ctx);
 		});
 		
 		app.post("/withdraw", ctx ->{
+			if(userController.login(ctx)) {
+				bController.withdrawById(ctx);
+			}
 			
-			bController.withdrawById(ctx);
 			
 		});
 		
 		app.post("/deposit", ctx ->{
+			if(userController.login(ctx)) {
+				bController.depositById(ctx);
+			}
 			
-			bController.depositById(ctx);
 			
 		});
 		
