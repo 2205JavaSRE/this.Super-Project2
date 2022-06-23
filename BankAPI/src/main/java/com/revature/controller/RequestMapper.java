@@ -156,32 +156,49 @@ public class RequestMapper {
 		});
 		
 		app.post("/secondaccount", ctx ->{
-			if(userController.login(ctx)) {
+			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)) {
 				bController.secondaryAccount(ctx);
+				ctx.status(201);
 			}
-	
+			else {
+				ctx.result("those credentials are invalid");
+				ctx.status(401);
+			}
 		});
 		
 		app.get("/accounts/{id}", ctx ->{
-			if(userController.login(ctx)) {
+			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)) {
 				bController.selectAllAccountById(ctx);
+				ctx.status(201);
+			}
+			else {
+				ctx.result("those credentials are invalid");
+				ctx.status(401);
 			}
 			
 		});
 		
 		app.post("/withdraw", ctx ->{
-			if(userController.login(ctx)) {
+			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)) {
 				bController.withdrawById(ctx);
+				ctx.status(201);
 			}
-			
+			else {
+				ctx.result("those credentials are invalid");
+				ctx.status(401);
+			}
 			
 		});
 		
 		app.post("/deposit", ctx ->{
-			if(userController.login(ctx)) {
+			if(ctx.cookieStore("access") != null && ctx.cookieStore("access").equals(true)) {
 				bController.depositById(ctx);
+				ctx.status(201);
 			}
-			
+			else {
+				ctx.result("those credentials are invalid");
+				ctx.status(401);
+			}			
 			
 		});
 		
