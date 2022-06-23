@@ -9,7 +9,7 @@ public class VersionController {
 
 	public static void getVersion(Context ctx) {
 		ctx.status(200); //Status Ok.
-		ctx.result("Version 1.0.0 of the BankAPI by Team: this.super()");
+		ctx.result("Version 1.1.1 of the BankAPI by Team: this.super()");
 	}
 
 }
