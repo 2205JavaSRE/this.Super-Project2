@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.revature.models.*;
+import com.revature.util.ConnectionFactory;
 
 import io.javalin.Javalin;
 import io.micrometer.core.instrument.Counter;
@@ -45,6 +46,21 @@ public class RequestMapper {
 		//Counter counter1 = Counter.builder("http_request_total").
 		CollectorRegistry registry2 = new CollectorRegistry();
 		Gauge gauge= Gauge.build().name("Gauge_test").help("size").register(registry2);
+//		io.micrometer.core.instrument.Gauge.builder("is_rds_connected",
+//				new ValidRdsConnectionGauge(), obj -> obj.value()).register(registry);
+		io.micrometer.core.instrument.Gauge.builder("is_rds_connected",() -> {
+			try {
+				int timeoutInSeconds = 3;
+				java.sql.Connection conn = ConnectionFactory.getConnection();
+				if(conn != null && conn.isValid(timeoutInSeconds)) {
+					return 1.0;
+				}
+			} catch (java.sql.SQLException e) {
+				return 0;
+			}
+			return 0;
+		}).register(registry);
+
 
 		
 		
